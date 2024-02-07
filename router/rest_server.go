@@ -43,6 +43,9 @@ func (server *sampleRESTServer) calculatorFunction(c *gin.Context) {
 	var req requestStructures.CalculateRequest
 
 	if err := c.ShouldBindJSON(&req); err != nil {
+
+		server.logger.Debug0().LogDebug("error un-marshalling the request structure", err)
+
 		wscutils.SendErrorResponse(c,
 			wscutils.NewResponse(
 				wscutils.ErrorStatus,
@@ -61,6 +64,15 @@ func (server *sampleRESTServer) calculatorFunction(c *gin.Context) {
 
 	validationErrors := wscutils.WscValidate(req, func(err validator.FieldError) []string { return []string{} })
 	if len(validationErrors) > 0 {
+
+		server.logger.Debug0().LogDebug("validations failed with the validation failure", struct {
+			request    requestStructures.CalculateRequest
+			errMessage []wscutils.ErrorMessage
+		}{
+			request:    req,
+			errMessage: validationErrors,
+		})
+
 		wscutils.SendErrorResponse(c, wscutils.NewResponse(wscutils.ErrorStatus, nil, validationErrors))
 		return
 	} else {
