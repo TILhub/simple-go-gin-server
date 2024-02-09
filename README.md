@@ -6,9 +6,11 @@
 curl --location 'http://localhost:8080/api/v1/calculator' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-    "operand1": "10",
+    "data" : {
+    "operand1": "1110",
     "operand2": "5",
     "email": "example@gmail.com",
-    "operand" : 2
+    "operand" : 3
+}
 }'
 ```
