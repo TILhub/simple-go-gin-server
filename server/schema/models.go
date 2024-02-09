@@ -1,4 +1,4 @@
-package requestStructures
+package schema
 
 type APPInfo struct {
 	Name string

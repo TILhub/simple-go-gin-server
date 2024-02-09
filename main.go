@@ -1,13 +1,14 @@
 package main
 
 import (
-	r "awesomeProject2/router"
+	"awesomeProject2/server/schema"
 	"github.com/gin-gonic/gin"
+	"github.com/remiges-tech/alya/service"
 	"github.com/remiges-tech/logharbour/logharbour"
 	"log"
 	"net/http"
 	"os"
-	"time"
+	"strconv"
 )
 
 func main() {
@@ -37,19 +38,17 @@ func main() {
 		c.Next()
 	})
 
-	restServer := r.NewRESTServer(router, logger)
-	restServer.Init()
+	s := service.NewService(router).
+		WithLogHarbour(logger)
+	apiV1Group := router.Group("/api/v1")
 
-	httpServer := &http.Server{
-		Addr:           ":8080",
-		Handler:        router,
-		ReadTimeout:    60 * time.Second,
-		WriteTimeout:   60 * time.Second,
-		MaxHeaderBytes: 1 << 20,
-	}
+	s.RegisterRouteWithGroup(apiV1Group, http.MethodPost, "/calculator", schema.CalculatorFunction)
+	s.RegisterRouteWithGroup(apiV1Group, http.MethodGet, "", schema.HealthCheck)
 
-	err = httpServer.ListenAndServe()
+	appServerPortStr := strconv.Itoa(8080)
+	err = router.Run(":" + appServerPortStr)
 	if err != nil {
-		logger.Err().LogDebug("error starting the rest server", err)
+		logger.LogActivity("Failed to start server", err)
+		log.Fatalf("Failed to start server: %v", err)
 	}
 }
