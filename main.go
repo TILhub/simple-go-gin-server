@@ -19,8 +19,8 @@ func main() {
 	}
 
 	fallbackWriter := logharbour.NewFallbackWriter(logFile, os.Stdout)
-	lctx := logharbour.NewLoggerContext(logharbour.Debug2)
-	logger := logharbour.NewLogger(lctx, "sampleCode", fallbackWriter)
+	lCtx := logharbour.NewLoggerContext(logharbour.Debug2)
+	logger := logharbour.NewLogger(lCtx, "sampleCode", fallbackWriter)
 
 	router := gin.Default()
 
@@ -30,8 +30,8 @@ func main() {
 			if err := recover(); err != nil {
 				logger.Err().LogDebug("panic recovered", err)
 				c.JSON(http.StatusInternalServerError, gin.H{
-					"error":       "Internal Server Error",
-					"erroMessage": err,
+					"error":        "Internal Server Error",
+					"errorMessage": err,
 				})
 			}
 		}()
