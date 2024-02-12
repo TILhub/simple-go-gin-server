@@ -1,0 +1,11 @@
+{
+  "status": "error",
+  "data": null,
+  "messages": [
+    {
+      "msgid": 0,
+      "errcode": "email",
+      "field": "Email"
+    }
+  ]
+}

@@ -5,7 +5,7 @@ go 1.21.3
 require (
 	github.com/gin-gonic/gin v1.9.1
 	github.com/remiges-tech/alya v0.8.0
-	go.uber.org/zap v1.17.0
+	github.com/stretchr/testify v1.8.4
 )
 
 require (
@@ -30,6 +30,7 @@ require (
 	github.com/klauspost/compress v1.16.7 // indirect
 	github.com/kr/text v0.2.0 // indirect
 	github.com/pierrec/lz4/v4 v4.1.19 // indirect
+	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/rcrowley/go-metrics v0.0.0-20201227073835-cf1acfcdf475 // indirect
 	github.com/remiges-tech/rigel v0.12.0 // indirect
 	github.com/rogpeppe/go-internal v1.12.0 // indirect
@@ -38,6 +39,7 @@ require (
 	go.etcd.io/etcd/client/v3 v3.5.10 // indirect
 	go.uber.org/atomic v1.7.0 // indirect
 	go.uber.org/multierr v1.6.0 // indirect
+	go.uber.org/zap v1.17.0 // indirect
 	google.golang.org/genproto v0.0.0-20230711160842-782d3b101e98 // indirect
 	google.golang.org/genproto/googleapis/api v0.0.0-20230711160842-782d3b101e98 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20230711160842-782d3b101e98 // indirect
